@@ -7,6 +7,9 @@ const router = require('express').Router()
 // routes/:
 
 // URL: /
+
+// token:
+router.use('/tokens', require('./token'))
 //user:
 router.use('/users', require('./user'))
 // car:
