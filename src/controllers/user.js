@@ -64,14 +64,23 @@ module.exports = {
             #swagger.summary = "Get Single User"
         */
 
-        const data = await User.findOne({ _id: req.params.id })
+        // Filters:
+        // if (req.user.isAdmin) {
+        //     let filters = {}
+        // } else {
+        //     let filters = { _id: req.user._id }
+        // }
+        // Only self record:
+        let filters = {}
+        if (!req.user?.isAdmin) filters = { _id: req.user._id }
+
+        const data = await User.findOne({ _id: req.params.id, ...filters })
 
         res.status(200).send({
             error: false,
             data
         })
     },
-
     update: async (req, res) => {
         /*
             #swagger.tags = ["Users"]
