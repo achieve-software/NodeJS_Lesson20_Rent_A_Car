@@ -5,6 +5,9 @@
 // User Controller:
 
 const User = require('../models/user')
+const Token = require('../models/token')
+const passwordEncrypt = require('../helpers/passwordEncrypt')
+const { token } = require('morgan')
 
 module.exports = {
 
@@ -50,10 +53,19 @@ module.exports = {
             }
         */
 
+        // Disallow set admin:
+        req.body.isAdmin = false
+
         const data = await User.create(req.body)
+
+        /* TOKEN */
+        let tokenKey = passwordEncrypt(data._id + Date.now())
+        let tokenData = await Token.create({ userId: data._id, token: tokenKey })
+        /* TOKEN */
 
         res.status(201).send({
             error: false,
+            token: tokenData.token,
             data
         })
     },
@@ -81,6 +93,7 @@ module.exports = {
             data
         })
     },
+
     update: async (req, res) => {
         /*
             #swagger.tags = ["Users"]
@@ -98,7 +111,14 @@ module.exports = {
             }
         */
 
-        const data = await User.updateOne({ _id: req.params.id }, req.body, { runValidators: true })
+        // Only self record:
+        let filters = {}
+        if (!req.user?.isAdmin) {
+            filters = { _id: req.user._id }
+            req.body.isAdmin = false
+        }
+
+        const data = await User.updateOne({ _id: req.params.id, ...filters }, req.body, { runValidators: true })
 
         res.status(200).send({
             error: false,
