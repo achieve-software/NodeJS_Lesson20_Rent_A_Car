@@ -38,6 +38,12 @@ app.use(require('./src/middlewares/logger'))
 // res.getModelList():
 app.use(require('./src/middlewares/findSearchSortPage'))
 
+// Sending Mail (nodemailer):
+
+// const nodemailer = require('nodemailer')
+
+// Create Test (Fake) Account:
+// nodemailer.createTestAccount().then((email) => console.log(email))
 /* ------------------------------------------------------- */
 // Routes:
 
