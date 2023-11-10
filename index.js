@@ -66,15 +66,38 @@ const transporter = nodemailer.createTransport({
     }
 })
  // // SendMail:
-transporter.sendMail({
-    from: 'zf6tkcbceohgqytg@ethereal.email',
-    to: 'qadir@clarusway.com', // 'abc@mail.com, def@mail.com'
-    subject: 'Hello',
-    text: 'Hello There...',
-    html: '<b>Hello There</b>'
-}, (error, successInfo) => {
-    (error) ? console.log(error) : console.log(successInfo)
-})
+// transporter.sendMail({
+//     from: 'zf6tkcbceohgqytg@ethereal.email',
+//     to: 'qadir@clarusway.com', // 'abc@mail.com, def@mail.com'
+//     subject: 'Hello',
+//     text: 'Hello There...',
+//     html: '<b>Hello There</b>'
+// }, (error, successInfo) => {
+//     (error) ? console.log(error) : console.log(successInfo)
+// })
+
+// //? GoogleMail (gmail):
+// // Google -> AccountHome -> Security -> Two-Step-Verify -> App-Passwords
+// const mailSettings = {
+//     service: 'Gmail',
+//     user: 'qadiradamson@gmail.com',
+//     pass: 'rzbzhwzqjbpbijfn' // https://myaccount.google.com/u/1/apppasswords
+// }
+// // //? YandexMail (yandex):
+// // const mailSettings = {
+// //     service: 'Yandex',
+// //     user: 'username@yandex.com',
+// //     pass: 'password' // your emailPassword
+// // }
+// // Mail Subject/Content:
+// const emailContent = {
+//     from: mailSettings.user,
+//     to: 'qadiradamson@gmail.com',
+//     subject: 'Hello',
+//     text: 'Hello, How are you?',
+//     html: '<b>Hello</b> How are you?'
+// }
+
 /* ------------------------------------------------------- */
 // Routes:
 
